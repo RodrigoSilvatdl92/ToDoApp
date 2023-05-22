@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  background-color:rgb(98, 96, 96);
+}
+
+:root {
+  --fc-button-bg-color: rgb(75 85 99);
+  --fc-button-text: bold;
+  --fc-event-bg-color: #b1b1b175;
+  --fc-event-border-color: #060606;
+  --fc-border-color: black;
+}
+
+.fc-dayGridMonth-view .fc-day{
+  height:80px;
+}
+
+.fc-event-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fc-event-time {
+  display: none;
+}
+
+.fc-timegrid-event-harness-inset {
+  padding: 2px 4px;
+}
+
+
+
+.fc {
+
+  & .fc-button {
+    border:none;
+    border-radius: 8px;
+    overflow: visible;
+    text-transform: none;
+    margin: 0;
+    font-size:small;
+    font-family: inherit;
+    font-weight: 700;
+    height:42px;
+  }
+}
+
+:root{
+  --fc-today-bg-color: rgba(157, 205, 244, 0.309);
+
+}
+
+
+
+.fc-event-dot {
+  display: none;
+}
+
+.fc-time-grid-event .fc-time,
+.fc-time-grid-event .fc-title {
+  background-color: transparent !important;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.fc-time-area {
+  background-color: transparent !important;
+}
+
+
+.fc-unthemed .fc-scrollgrid {
+  background-color: transparent !important;
+}
+
+tbody:hover{
+cursor:pointer;
+}
+
+.fc-popover-body {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 576px) {
+  /* Hide DayGridMonth and TimeGridWeek buttons */
+  .fc-toolbar .fc-dayGridMonth-button, 
+  .fc-toolbar .fc-timeGridWeek-button {
+    display: none;
+  }
+  .fc .fc-toolbar-title {
+      font-size: 12px;
+      white-space: normal !important;
+   }
+
+    .fc-header-toolbar .fc-timeGridDay-button {
+      border-left: 10px;
+    }
+  
+
+  }
+
+  .disabled-button {
+    background-color: gray;
+    color: white;
+  
+  }
+
+  .disabled-button2{
+    color:gray; 
+    border:gray;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}

@@ -1,0 +1,8 @@
+Compor o painel dos eventos
+implementar um search 
+implementar uma cor diferente para Ferias
+implementar remover evento carregando nele
+implementar mensagem de confirmação de remoção de evento
+
+implementar recuperação de password
+implementar erro para quando password está incorrecta 
