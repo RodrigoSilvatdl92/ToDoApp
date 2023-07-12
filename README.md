@@ -1,3 +1,7 @@
+This project was made using html, tailwind and reactJs.
+It's a ToDo app where we can add tasks or events to the desired day/time on the calendar
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
