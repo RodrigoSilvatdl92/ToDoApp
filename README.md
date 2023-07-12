@@ -1,6 +1,5 @@
-This project was made using html, tailwind and reactJs.
+This project was made using tailwind , reactJs and Firebase.
 It's a ToDo app where we can add tasks or events to the desired day/time on the calendar
-
 
 # Getting Started with Create React App
 
