@@ -32,7 +32,7 @@ function SearchEvent() {
     setShowSearchedEvent(item);
     setSearchResults([]);
   };
-  /* apagar os resultados de pesquisa quando só quando clico fora do container do searchBar, assim quando carrego num resultado ele não apaga o resultado e assim posso seguir ver os detalhes caso contrário não conseguia ver os detalhes do evento porque seria apagado antes disso  */
+  /*delete the results of the search when i click outside of the container searchBar, that way when i click on a result it shows the details and won't delete them  */
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -52,7 +52,7 @@ function SearchEvent() {
     };
   }, []);
 
-  /* função para fechar o eventoDetail  */
+  /* function close eventoDetail  */
 
   const handlerCloseEventDetails = (props) => {
     setShowSearchedEvent(props);

@@ -22,20 +22,18 @@ function Calendar() {
 
   const [hasError, setError] = useState("");
 
-  /* função para fechar o modal do erro quando carrego continue  */
+  /* closing error modal when click continue  */
 
   const closeErrorModal = (props) => {
     setError(props);
   };
 
-  /* loading das tarefas do firebase */
+  /* loading firebase events */
   useEffect(() => {
     dispatch(loadEvents());
   }, [dispatch]);
 
-  /* click event nos dias */
-
-  /* preciso de saber se o evento se da num dia ou semana ou no mes , se for no mes preciso de um form com introdução de hora de começo e fim .. se for dia ou semana só preciso de no form saber a duração do evento e portanto preciso de uma variavel para saber isso e passar o props para o eventClick.jsx */
+  /* if the event view is week/day or month.. depending on that view the event form will be different */
   const [displayClickEvent, setDisplayClickEvent] = useState("");
   const [isDayOrWeek, setIsDayOrWeek] = useState("");
 
@@ -56,13 +54,13 @@ function Calendar() {
     setDisplayClickEvent(true);
   };
 
-  /* função para fechar o clickEvent */
+  /* close clickEvent */
 
   const closeOnClickEvent = (props) => {
     setDisplayClickEvent(props);
   };
 
-  /* mudar a hora default de inicio da timeGridWeek and timeGridDay de 24.00 para 00.00  */
+  /* changing default hour of timeGridWeek and timeGridDay from 24.00 to 00.00  */
   const slotLabelContents = (arg) => {
     const { date } = arg;
     const hour = date.getHours().toString().padStart(2, "0");
@@ -70,7 +68,7 @@ function Calendar() {
     return `${hour}:${minute}`;
   };
 
-  /* funções para quando pressionas nos eventos para apagar  */
+  /* function when pressing events to delete them  */
 
   let pressTimer;
 
@@ -114,7 +112,7 @@ function Calendar() {
         slotEventOverlap={false}
         eventOverlap={false}
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        initialView={"dayGridMonth"}
+        initialView={"timeGridDay"}
         dateClick={(datainfo) => {
           handlerEventClick(datainfo);
         }}
@@ -205,7 +203,7 @@ function Calendar() {
               onMouseUp={handlePressEnd}
               onMouseLeave={handlePressEnd}
             >
-              {/* texto que aparece dentro dos eventos */}
+              {/* event content */}
               {time} {eventInfo.event.title}
             </div>,
           ];

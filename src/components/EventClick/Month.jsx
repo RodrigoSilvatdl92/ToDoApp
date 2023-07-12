@@ -112,8 +112,8 @@ function Month({ infoForForm, onClose }) {
           name="start"
           className={
             formik.errors.start && formik.touched.start
-              ? "mb-2 focus:outline-none border-2 border-red-600"
-              : "mb-2 focus:outline-none"
+              ? "mb-2 focus:outline-none border-2 border-red-600 cursor-pointer"
+              : "mb-2 focus:outline-none cursor-pointer"
           }
         />
         {formik.errors.start && formik.touched.start && (
@@ -134,8 +134,8 @@ function Month({ infoForForm, onClose }) {
           name="end"
           className={
             formik.errors.end && formik.touched.end
-              ? "mb-2 focus:outline-none border-2 border-red-600"
-              : "mb-2 focus:outline-none"
+              ? "mb-2 focus:outline-none border-2 border-red-600 cursor-pointer"
+              : "mb-2 focus:outline-none cursor-pointer"
           }
         />
         {formik.errors.end && formik.touched.end && (
@@ -150,7 +150,7 @@ function Month({ infoForForm, onClose }) {
         <select
           id="priority"
           name="priority"
-          className="mb-2"
+          className="mb-2 cursor-pointer"
           value={formik.values.priority}
           onChange={formik.handleChange}
         >
@@ -160,7 +160,7 @@ function Month({ infoForForm, onClose }) {
         </select>
         <button
           type="submit"
-          className="bg-gray-600 mt-[8px] rounded text-xl text-white font-bold"
+          className="bg-gray-600 mt-[8px] rounded text-xl text-white font-semibold"
         >
           Add Event
         </button>

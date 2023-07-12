@@ -13,7 +13,6 @@ import logo from "../imagens/logo.jpg";
 function Home() {
   const dispatch = useDispatch();
 
-  /* definir se o modal abre ou não com perfilVisible e perfilOpen serve para passar o props para o perfil component para dar o efeito de transição a descer qnd abre o modal do perfil .. se for não está numa posição " acima do normal " .. qnd open é verdadeiro ele desce para a posição em que vemos quando abrimos o modal assim dando o "efeito desejado "*/
   const [PerfilVisible, setPerfilVisible] = useState(false);
   const [PerfilOpen, setPerfilOpen] = useState(false);
   const [instructionsOpen, setInstructionsOpen] = useState(false);
@@ -36,6 +35,8 @@ function Home() {
     });
   }, [currentUser]);
 
+  console.log(data);
+
   return (
     <div className="max-w-screen-xl m-auto px-2 ">
       <div className="flex  items-center justify-center max-h-[240px] w-full rounded-md  shadow-lg shadow-black/5 dark:shadow-black/30">
@@ -52,29 +53,30 @@ function Home() {
               src={data?.photo}
               alt="/"
             />
-            <div className="text-black text-right pr-4 text-2xl md:text-2xl w-[100%] mt-1 mb-4 ">
-              Hello {data?.name}
+            <div className="text-black text-right pr-4 text-base md:text-2xl w-[100%] mt-1 mb-4 ">
+              <p>Hello</p>
+              <p>{data?.name}</p>
             </div>
           </div>
           <div className="flex justify-end mb-4">
             <button
               onClick={handlerPerfilClick}
-              className="bg-gray-600 p-1 mr-4 rounded block md:text-xl text-sm text-white font-bold  transform 
-              transition duration-200 hover:scale-110  "
+              className="bg-gray-600 p-1 mr-4 rounded block md:text-xl text-sm text-white font-semibold  transform 
+              transition duration-200 hover:bg-gray-500 hover:text-black  "
             >
               Perfil
             </button>
             <button
-              className="bg-gray-600 p-1 mr-4 rounded block md:text-xl text-sm text-white font-bold  transform 
-              transition duration-200 hover:scale-110 "
+              className="bg-gray-600 p-1 mr-4 rounded block md:text-xl text-sm text-white font-semibold  transform 
+              transition duration-200 hover:bg-gray-500 hover:text-black "
               onClick={() => setInstructionsOpen(true)}
             >
               Instructions
             </button>
             <button
               onClick={() => dispatch(logOut())}
-              className="bg-gray-600 p-1 mr-4 rounded block md:text-xl text-sm text-white font-bold  transform 
-              transition duration-200 hover:scale-110 w-[100px] whitespace-nowrap"
+              className="bg-gray-600 p-1 mr-4 rounded block md:text-xl text-sm text-white font-semibold  transform 
+              transition duration-200 hover:bg-gray-500 hover:text-black w-[100px] whitespace-nowrap"
             >
               Log Out
             </button>
@@ -97,7 +99,7 @@ function Home() {
           )}
         </div>
       </div>
-      <div>
+      <div className="h-[800px]">
         <div className="mt-4">
           <SearchBar />
         </div>

@@ -4,7 +4,7 @@
 
 body {
   margin: 0;
-  background-color:rgb(98, 96, 96);
+  background-color: rgb(98, 96, 96);
 }
 
 :root {
@@ -15,8 +15,8 @@ body {
   --fc-border-color: black;
 }
 
-.fc-dayGridMonth-view .fc-day{
-  height:80px;
+.fc-dayGridMonth-view .fc-day {
+  height: 80px;
 }
 
 .fc-event-title {
@@ -33,29 +33,23 @@ body {
   padding: 2px 4px;
 }
 
-
-
 .fc {
-
   & .fc-button {
-    border:none;
+    border: none;
     border-radius: 8px;
     overflow: visible;
     text-transform: none;
     margin: 0;
-    font-size:small;
+    font-size: small;
     font-family: inherit;
     font-weight: 700;
-    height:42px;
+    height: 42px;
   }
 }
 
-:root{
+:root {
   --fc-today-bg-color: rgba(157, 205, 244, 0.309);
-
 }
-
-
 
 .fc-event-dot {
   display: none;
@@ -69,18 +63,16 @@ body {
   text-overflow: ellipsis;
 }
 
-
 .fc-time-area {
   background-color: transparent !important;
 }
-
 
 .fc-unthemed .fc-scrollgrid {
   background-color: transparent !important;
 }
 
-tbody:hover{
-cursor:pointer;
+tbody:hover {
+  cursor: pointer;
 }
 
 .fc-popover-body {
@@ -89,39 +81,40 @@ cursor:pointer;
 
 @media screen and (max-width: 576px) {
   /* Hide DayGridMonth and TimeGridWeek buttons */
-  .fc-toolbar .fc-dayGridMonth-button, 
+  .fc-toolbar .fc-dayGridMonth-button,
   .fc-toolbar .fc-timeGridWeek-button {
     display: none;
   }
   .fc .fc-toolbar-title {
-      font-size: 12px;
-      white-space: normal !important;
-   }
-
-    .fc-header-toolbar .fc-timeGridDay-button {
-      border-left: 10px;
-    }
-  
-
+    font-size: 12px;
+    white-space: normal !important;
   }
 
-  .disabled-button {
-    background-color: gray;
-    color: white;
-  
+  .fc-header-toolbar .fc-timeGridDay-button {
+    border-left: 10px;
   }
 
-  .disabled-button2{
-    color:gray; 
-    border:gray;
+  .fc-media-screen {
+    height: 650px;
   }
+}
 
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
+.disabled-button {
+  background-color: gray;
+  color: white;
+}
+
+.disabled-button2 {
+  color: gray;
+  border: gray;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 
 /* For IE, Edge and Firefox */
 .scrollbar-hide {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }

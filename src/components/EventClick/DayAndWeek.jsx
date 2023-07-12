@@ -108,8 +108,8 @@ function DayAndWeek({ infoForForm, onClose }) {
           onBlur={formik.handleBlur}
           className={
             formik.errors.end && formik.touched.end
-              ? "mb-2 focus:outline-none border-2 border-red-600"
-              : "mb-2 focus:outline-none"
+              ? "mb-2 focus:outline-none border-2 border-red-600 cursor-pointer "
+              : "mb-2 focus:outline-none cursor-pointer"
           }
         />
         {formik.errors.end && formik.touched.end && (
@@ -124,7 +124,7 @@ function DayAndWeek({ infoForForm, onClose }) {
         <select
           id="priority"
           name="priority"
-          className="mb-2"
+          className="mb-2 cursor-pointer"
           value={formik.values.priority}
           onChange={formik.handleChange}
         >
@@ -133,7 +133,12 @@ function DayAndWeek({ infoForForm, onClose }) {
           <option value="ok">Ok</option>
         </select>
 
-        <button type="submit">Add Event</button>
+        <button
+          type="submit"
+          className="bg-gray-600 mt-[8px] rounded text-xl text-white font-semibold"
+        >
+          Add Event
+        </button>
       </form>
     </div>
   );

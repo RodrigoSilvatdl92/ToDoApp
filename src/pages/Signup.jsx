@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useFormik } from "formik";
 import { signUp } from "../store/authReducer";
+import { motion } from "framer-motion";
 
 import fundo from "../imagens/fundo.jpg";
 import { signUpSchema } from "../schemas/schemas";
@@ -51,8 +52,6 @@ function SignUp() {
     onSubmit,
   });
 
-  /* como definiste o onSubmitHandler dentro do formik ele agora tem estes dois argumentos ( values e actions) */
-
   return (
     <div className="relative">
       <div
@@ -75,7 +74,7 @@ function SignUp() {
             with our to-do app and integrated calendar
           </h1>
         </div>
-        <div className="max-w-[380px] mt-[150px] mx-auto bg-black/70 rounded-md ">
+        <div className="max-w-[380px] mt-[50px] md:mt-[150px] mx-2 md:mx-auto bg-black/70 rounded-md ">
           <form
             onSubmit={formik.handleSubmit}
             className="ml-10 py-10 m-auto w-[80%]"
@@ -169,9 +168,12 @@ function SignUp() {
                 )}
               </div>
             </div>
-            <button className="bg-gray-600 px-4 py-1 mt-6 rounded block text-xl text-white font-bold transform transition duration-200 hover:scale-110">
+            <motion.button
+              className="bg-gray-600 px-4  mt-6 rounded block text-xl text-white font-semibold "
+              whileTap={{ scale: 0.99, y: 2 }}
+            >
               Sign Up
-            </button>
+            </motion.button>
             {sendValidationEmail && (
               <p className="text-xs text-green-700">
                 An email with the validation link has been sent to your Email!

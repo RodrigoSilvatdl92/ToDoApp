@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { setError } from "../store/authReducer";
 import fundo from "../imagens/fundo.jpg";
 import { recoverPassword } from "../store/authReducer";
+import { motion } from "framer-motion";
 
 function Signin() {
   const [displayRecoverPassoword, setDisplayRecoverPassword] = useState(false);
@@ -71,7 +72,7 @@ function Signin() {
             with our to-do app and integrated calendar
           </h1>
         </div>
-        <div className="max-w-[380px] mt-[150px] mx-auto bg-black/70 rounded-md ">
+        <div className="max-w-[380px] mt-[50px] md:mt-[150px] mx-2 md:mx-auto bg-black/70 rounded-md ">
           <form className="ml-10 py-10 m-auto w-[80%]">
             <h1 className="text-white font-bold text-2xl">Sign In</h1>
             {/* username */}
@@ -79,6 +80,7 @@ function Signin() {
               onChange={(event) => {
                 setUserEmail(event.target.value);
                 dispatch(setError(""));
+                setDisplayRecoverPassword(false);
               }}
               className="mt-6 w-full rounded-sm hover:border-none focus:outline-none px-1"
               type="text"
@@ -90,6 +92,7 @@ function Signin() {
                 onChange={(event) => {
                   setUserPassword(event.target.value);
                   dispatch(setError(""));
+                  setDisplayRecoverPassword(false);
                 }}
                 className="w-full rounded-sm hover:border-none focus:outline-none px-1"
                 type={passwordIsVisible ? "text" : "password"}
@@ -109,24 +112,14 @@ function Signin() {
             </div>
             <div className="flex justify-between mt-6">
               <div>
-                <button
+                <motion.button
                   onClick={onSubmitHandler}
-                  className="bg-gray-600 px-4 py-1 rounded block text-xl text-white font-bold transform transition duration-200 hover:scale-110"
+                  className="bg-gray-600 px-4  rounded-md block text-xl text-white font-semibold  "
+                  whileTap={{ scale: 0.99, y: 2 }}
                 >
                   Sign In
-                </button>
+                </motion.button>
                 {hasError && <p className="text-xs text-red-600">{hasError}</p>}
-              </div>
-              <div>
-                <button
-                  className="text-white"
-                  onClick={async (e) => {
-                    e.preventDefault();
-                    setDisplayRecoverPassword((lastState) => !lastState);
-                  }}
-                >
-                  Forgot Password?
-                </button>
               </div>
             </div>
 
@@ -138,8 +131,19 @@ function Signin() {
                 </span>
               </Link>
             </p>
+            <div>
+              <button
+                className="text-white text-sm underline"
+                onClick={async (e) => {
+                  e.preventDefault();
+                  setDisplayRecoverPassword((lastState) => !lastState);
+                }}
+              >
+                Forgot Password?
+              </button>
+            </div>
             {displayRecoverPassoword && (
-              <div className="mt-4">
+              <div className="mt-6">
                 <input
                   className="outline-none"
                   type="text"
@@ -147,33 +151,36 @@ function Signin() {
                   name="emailRecoverPassword"
                   onChange={(event) => setRecoverEmail(event.target.value)}
                 />
-                <button
-                  disabled={!recoverEmail}
-                  className={`${
-                    !recoverEmail
-                      ? "disabled-button2"
-                      : "text-white mt-2 border-2 px-1"
-                  }`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    try {
-                      dispatch(recoverPassword(recoverEmail));
-                      setRecoverPasswordEmailSent(true);
-                    } catch (error) {
-                      console.log(error.message);
+                <div className="mt-4">
+                  <button
+                    disabled={!recoverEmail}
+                    className={`${
+                      !recoverEmail
+                        ? "disabled-button2"
+                        : "text-white mt-2 border-2 px-1"
+                    }`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      try {
+                        dispatch(recoverPassword(recoverEmail));
+                        setRecoverPasswordEmailSent(true);
+                      } catch (error) {
+                        console.log(error.message);
+                      }
+                    }}
+                  >
+                    Recover Password
+                  </button>
+                  <button
+                    className="text-white ml-4 border-2 px-1"
+                    onClick={() =>
+                      setDisplayRecoverPassword((lastState) => !lastState)
                     }
-                  }}
-                >
-                  Recover Password
-                </button>
-                <button
-                  className="text-white ml-4 border-2 px-1"
-                  onClick={() =>
-                    setDisplayRecoverPassword((lastState) => !lastState)
-                  }
-                >
-                  Cancel
-                </button>
+                  >
+                    Cancel
+                  </button>
+                </div>
+
                 {recoverPasswordEmailSent && (
                   <p className="text-sm text-green-600">
                     Recover password email has been sent!

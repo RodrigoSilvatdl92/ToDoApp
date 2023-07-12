@@ -35,7 +35,6 @@ function Country() {
 
       const countries = response.data;
       const holidays = countries.map((country) => {
-        console.log(country);
         return {
           title: country.name,
           start: country.date,

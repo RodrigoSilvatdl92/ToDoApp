@@ -1,14 +1,34 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../store/authReducer";
-import { updateDoc, doc } from "firebase/firestore";
+import { updateDoc, doc, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { IoMdPhotos } from "react-icons/io";
 
 function Perfil({ onClose, open }) {
+  const fileInputRef = useRef(null);
+  const currentUser = useSelector(selectCurrentUser);
+  const [data, setData] = useState("");
+  const [name, setName] = useState("");
+  const [picture, setPicture] = useState("");
+  const [photo, setPhoto] = useState("");
   /* efeito abrir o Perfil para editar .. efeito definido pelo props open q é dado pelo Home qnd carregamos em perfil  */
   const [isTransitioning, setIsTransitioning] = useState(false);
+
+  useEffect(() => {
+    onSnapshot(doc(db, "users", currentUser), (doc) => {
+      setData(doc.data().perfil);
+    });
+  }, [currentUser]);
+
+  useEffect(() => {
+    if (data) {
+      setName(data.name);
+      setPhoto(data.photo);
+    }
+  }, [data]);
 
   useEffect(() => {
     if (open) {
@@ -19,24 +39,23 @@ function Perfil({ onClose, open }) {
   }, [open]);
 
   /* Envio de dados para o firebase do update do perfil */
-  const currentUser = useSelector(selectCurrentUser);
-  const [name, setName] = useState("");
-  const [photo, setPhoto] = useState(null);
 
+  console.log(photo);
   const submitHandlerPerfil = async (event) => {
+    console.log(event);
     event.preventDefault();
     const dbPath = doc(db, "users", `${currentUser}`);
 
-    if (photo) {
-      const storage = getStorage();
-      const storageRef = ref(storage, `users/${currentUser}/profilePhoto`);
-      await uploadBytes(storageRef, photo);
-      const photoUrl = await getDownloadURL(storageRef);
-
-      await updateDoc(dbPath, { perfil: { name: name, photo: photoUrl } });
-    } else {
-      await updateDoc(dbPath, { perfil: { name: name } });
+    const storage = getStorage();
+    const storageRef = ref(storage, `users/${currentUser}/profilePhoto`);
+    console.log(storageRef);
+    if (picture) {
+      await uploadBytes(storageRef, picture);
     }
+    const photoUrl = picture ? await getDownloadURL(storageRef) : photo;
+
+    await updateDoc(dbPath, { perfil: { name: name, photo: photoUrl } });
+    onClose();
   };
 
   return (
@@ -45,7 +64,6 @@ function Perfil({ onClose, open }) {
         className="w-full h-full absolute bg-black bg-opacity-70 backdrop-filter backdrop-blur-sm "
         onClick={onClose}
       />
-      {/* div do modal da edição do perfil com o isTransitioning para dar o efeito quando é para ver ou não o model , quando isTransitioning é true da´se o efeito */}
       <div
         className={`max-w-[380px] bg-gray-300 rounded-sm p-8 m-auto relative'} ${
           isTransitioning
@@ -61,6 +79,7 @@ function Perfil({ onClose, open }) {
               type="text"
               id="name"
               name="name"
+              defaultValue={name}
               className="w-full rounded border-none mt-2 pl-2"
             />
           </div>
@@ -70,13 +89,19 @@ function Perfil({ onClose, open }) {
               type="file"
               id="foto"
               name="foto"
-              className="w-full rounded border-none mt-2"
-              onChange={(event) => setPhoto(event.target.files[0])}
+              ref={fileInputRef}
+              className="hidden"
+              onChange={(event) => setPicture(event.target.files[0])}
+            />
+            <IoMdPhotos
+              className="cursor-pointer"
+              size={30}
+              onClick={() => fileInputRef.current.click()}
             />
           </div>
           <button
             onClick={submitHandlerPerfil}
-            className="bg-gray-600 px-4 py-1 mt-6 rounded block text-xl text-white font-bold transform transition duration-200 hover:scale-110"
+            className="bg-gray-600 px-4 py-1 mt-6 rounded block text-xl text-white font-semibold hover:bg-gray-500 hover:text-black"
           >
             Update Perfil
           </button>
