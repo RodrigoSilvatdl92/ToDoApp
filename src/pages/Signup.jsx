@@ -74,7 +74,7 @@ function SignUp() {
             with our to-do app and integrated calendar
           </h1>
         </div>
-        <div className="max-w-[380px] mt-[50px] md:mt-[150px] mx-2 md:mx-auto bg-black/70 rounded-md ">
+        <div className="max-w-[360px] mt-[50px] md:mt-[150px] mx-auto px-4 bg-black/70 rounded-md ">
           <form
             onSubmit={formik.handleSubmit}
             className="ml-10 py-10 m-auto w-[80%]"
