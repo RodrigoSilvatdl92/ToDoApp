@@ -193,6 +193,12 @@ function Calendar() {
                 whiteSpace: "nowrap", // Prevent wrapping of text
               }}
               title={eventInfo.event.title} // Set the full title as a tooltip
+              onTouchStart={() => {
+                if (eventInfo.event.extendedProps.priority === "holidays") {
+                  return;
+                }
+                handlePressStart(eventInfo.event.id);
+              }}
               onMouseDown={() => {
                 if (eventInfo.event.extendedProps.priority === "holidays") {
                   return;
@@ -202,6 +208,7 @@ function Calendar() {
               }}
               onMouseUp={handlePressEnd}
               onMouseLeave={handlePressEnd}
+              onTouchEnd={handlePressEnd}
             >
               {/* event content */}
               {time} {eventInfo.event.title}
