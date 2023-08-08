@@ -18,8 +18,6 @@ function Calendar() {
   const Events = useSelector(selectEvents);
   const dispatch = useDispatch();
 
-  console.log(Events);
-
   const [hasError, setError] = useState("");
 
   /* closing error modal when click continue  */
@@ -40,15 +38,21 @@ function Calendar() {
   const handlerEventClick = (info) => {
     const now = new Date();
     const eventStartTime = new Date(info.date).getTime();
-
-    if (eventStartTime < now.setHours(0, 0, 0, 0)) {
-      setError(`You cannot add an event to the past`);
-      return;
-    }
+    console.log(now);
+    console.log(info);
+    console.log(eventStartTime);
 
     if (info.view.type === "timeGridWeek" || info.view.type === "timeGridDay") {
+      if (eventStartTime < now.getTime()) {
+        setError(`You cannot add an event to the past`);
+        return;
+      }
       setIsDayOrWeek({ type: "dayOrWeek", info: info });
     } else if (info.view.type === "dayGridMonth") {
+      if (eventStartTime < now.setHours(0, 0, 0, 0)) {
+        setError(`You cannot add an event to the past`);
+        return;
+      }
       setIsDayOrWeek({ type: "month", info: info });
     }
     setDisplayClickEvent(true);

@@ -32,7 +32,7 @@ function ErrorModal({ open, onClose }) {
           <p className="text-center mt-4">{open}</p>
         </div>
         <p
-          className="w-full h-[40px] text-center leading-10 text-white font-semibold bg-red-500 text-xl mt-4 cursor-pointer"
+          className="w-full h-[40px] text-center leading-10 text-white font-semibold bg-red-500 text-xl mt-4 cursor-pointer rounded-b-sm"
           onClick={() => onClose("")}
         >
           Continue
